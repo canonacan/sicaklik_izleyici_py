@@ -33,6 +33,7 @@ sicaklik_izleyici_py/
 2. Sıcaklık değeri her saniye `/sicaklik` topic'i üzerinden yayınlanır.
 3. `sicaklik_izleyici` düğümü yayınlanan verileri alır.
 4. Sıcaklık 30°C'nin üzerine çıktığında uyarı mesajı gösterilir.
+5. Sıcaklık uyarı eşiği ROS 2 parametresi kullanılarak değiştirilebilir.
 
 ## Kurulum ve Çalıştırma
 
@@ -89,7 +90,19 @@ source ~/robotik/ros2_ws/install/setup.bash
 ros2 run sicaklik_izleyici_py izleyici
 ```
 
-### 7. ROS 2 düğüm grafiğini görüntüleme
+### 7. Sıcaklık eşik değerini değiştirme
+
+Varsayılan sıcaklık uyarı eşiği 30°C'dir. Bu değer, `sicaklik_esigi` parametresiyle değiştirilebilir.
+
+Örneğin, uyarı eşiğini 35°C yapmak için mevcut izleyici düğümünü `Ctrl + C` ile durdurun ve aşağıdaki komutla yeniden başlatın:
+
+```bash
+ros2 run sicaklik_izleyici_py izleyici --ros-args -p sicaklik_esigi:=35.0
+```
+
+Bu durumda sıcaklık 35°C'nin üzerine çıktığında uyarı mesajı gösterilir. Sensör düğümünü durdurmanız gerekmez.
+
+### 8. ROS 2 düğüm grafiğini görüntüleme
 
 Üçüncü terminalde:
 
@@ -101,7 +114,7 @@ ros2 run rqt_graph rqt_graph
 
 ## Beklenen Çıktı
 
-Sıcaklık izleyici, gelen sıcaklık değerlerini terminalde gösterir. Sıcaklık 30°C'yi aştığında uyarı verir.
+Sıcaklık izleyici, gelen sıcaklık değerlerini terminalde gösterir. Sıcaklık belirlenen eşiği aştığında uyarı verir.
 
 Örnek:
 
